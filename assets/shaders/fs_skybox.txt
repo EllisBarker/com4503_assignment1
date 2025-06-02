@@ -1,0 +1,15 @@
+#version 330 core
+
+in vec3 skyboxCoord;
+in vec2 movingTexCoord;
+
+out vec4 fragColor;
+
+uniform samplerCube skybox;
+uniform sampler2D moving_texture;
+
+void main() {
+  vec3 color1 = texture(skybox, normalize(skyboxCoord)).rgb;
+  vec3 color2 = texture(moving_texture, movingTexCoord).rgb;
+  fragColor = vec4(mix(color1, color2, 0.5f), 1.0f);
+}
